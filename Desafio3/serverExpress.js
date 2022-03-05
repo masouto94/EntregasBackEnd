@@ -1,8 +1,7 @@
 const express = require('express')
-import { Contenedor } from './src/Contenedor'
-
-const manager = new Contenedor(".src/file.txt")
-async const all_ids = await manager.getAll().then(prods => prods.id)
+const container= require( '.src/Contenedor.js')
+const manager = new container.Contenedor(".src/file.txt")
+const all_ids = manager.getAll().then(prods => prods.id)
 
 const app = express()
 
