@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products manager</title>
+</head>
+<body>
+     <h1>Find product</h1>
+  <form action="/api/products/:id" method="GET">
+    <input type="text" name="id"></input>
+    <button type="submit">Find product</button>
+    <br>
+  <h1>Add products</h1>
+  <form action="/api/products/add" method="POST">
+    <input type="text" name="title"></input>
+    <input type="text" name="price"></input>
+    <input type="text" name="thumbnail"></input>
+    <button type="submit">Save product</button>
+  </form>
+  <br>
+  <h1>Update product</h1>
+  <form action="/api/products/update/:id" method="PUT">
+    <input type="text" name="id"></input>
+    <input type="text" name="title"></input>
+    <input type="text" name="price"></input>
+    <input type="text" name="thumbnail"></input>
+
+    <button type="submit">Find product</button>
+  <br>
+  <h1>Delete product</h1>
+  <form action="/api/products/delete/:id" method="DELETE">
+    <input type="text" name="id"></input>
+    <button type="submit">Find product</button>
+
+</body>
+</html>
