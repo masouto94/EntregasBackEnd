@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const express = require('express')
-const {Router} = express
+const bodyParser = require('body-parser');
 const contenedor = require('./src/Contenedor')
 
 const manager = new contenedor.Contenedor("./src/file.txt")
@@ -10,21 +10,23 @@ const getAll = async() =>{
 }
 getAll()
 
+
 const app= express()
 //const router = Router()
 
 
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
+app.use(bodyParser.urlencoded({ extended: true }));
 app.set("views", "./src/views");
 app.set("view engine", "ejs");
 app.use(express.static('public'));
 
 
 app.get('/show', (req,res) => {
-
+    
     res.render('pages/productsShow.ejs',{
-
+        prods:all_prods
     })
 })
 
@@ -34,21 +36,51 @@ app.get('/', (req,res) => {
 })
 
 
+
+
 app.post('/', (req,res) => {
     
-    res.send('<script>alert("Información guardada");window.location.href="/"</script>');
+    manager.save(req.body).then(r=>
+        res.status(200).send('<script>alert("Información guardada");window.location.href="/"</script>')
 
-    
+    )
+
+})
+
+app.put('/', (req,res) => {
+    let {data} = req.body
+    let product =manager.getById(parseInt(data.id))
+    if(product.length ===0){
+        return res.status(404).json({error:"Product not found"})
+    }
+    else{
+        
+        res.status(200).send('<script>alert("Información editada");window.location.href="/"</script>')
+
+    }
+
+})
+
+app.delete('/', (req,res) => {
+    let {data} = req.body
+    let product =manager.getById(parseInt(data.id))
+    if(product.length ===0){
+        return res.status(404).json({error:"Product not found"})
+    }
+    else{
+        manager.deleteByID(req.params.id)
+        res.status(200).send(`<script>alert("Se borró producto ${req.body.id}");window.location.href="/"</script>`)
+        
+    }
+
 })
 
 
 
 
 
-//app.use('/products', router)
-
-const PORT = 8081
+const PORT = 3000
 const server = app.listen(PORT, () => {
-    console.log('Levantado server en express')
+    console.log('Levantado server en express en el puerto: ', PORT)
 })
 server.on("error", (error) => console.log(error))
