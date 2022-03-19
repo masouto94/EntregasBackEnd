@@ -1,0 +1,28 @@
+<h1>Find product</h1>
+<form action="/api/products/:id" method="GET">
+  <input type="text" placeholder="id" name="id"></input>
+  <button type="submit">Find product</button>
+  <br>
+  </form>
+<h1>Add products</h1>
+<form action="/" method="POST">
+  <input type="text" placeholder="title" name="title"></input>
+  <input type="text" placeholder="price" name="price"></input>
+  <input type="text" placeholder="thumbnail" name="thumbnail"></input>
+  <button type="submit">Save product</button>
+</form>
+<br>
+<h1>Update product</h1>
+<form action="/api/products/update/:id" method="PUT">
+  <input type="text" placeholder="id" name="id"></input>
+  <input type="text" placeholder="title" name="title"></input>
+  <input type="text" placeholder="price" name="price"></input>
+  <input type="text" placeholder="thumbnail" name="thumbnail"></input>
+  <button type="submit">Find product</button>
+</form>
+<br>
+<h1>Delete product</h1>
+<form action="/api/products/delete/:id" method="DELETE">
+  <input type="text" placeholder="id" name="id"></input>
+  <button type="submit">Find product</button>
+</form>
